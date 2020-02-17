@@ -9,11 +9,11 @@ export class UserInfoEntity {
     password: string;
 
     @prop()
-    userPhone: string;
+    Phone: string;
 
     @prop()
     email: string;
 
-    @prop()
+    @prop() 
     phoneModel: string;
 }

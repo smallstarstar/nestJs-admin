@@ -13,7 +13,7 @@ export class UserInfo {
     @ApiProperty({ name: 'userPhone' })
     @Length(11)
     @IsNotEmpty({ message: '不可以为空' })
-    userPhone: string;
+    Phone: string;
 
     @IsNotEmpty({ message: '不可以为空' })
     @ApiProperty({ name: 'email' })
