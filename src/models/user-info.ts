@@ -10,10 +10,10 @@ export class UserInfo {
     @IsNotEmpty({ message: '不可以为空' })
     password: string;
 
-    @ApiProperty({ name: 'userPhone' })
-    @Length(11)
+    @ApiProperty({ name: 'phone' })
+    // @Length(11)
     @IsNotEmpty({ message: '不可以为空' })
-    Phone: string;
+    phone: string;
 
     @IsNotEmpty({ message: '不可以为空' })
     @ApiProperty({ name: 'email' })
@@ -22,4 +22,8 @@ export class UserInfo {
     @IsNotEmpty({ message: '不可以为空' })
     @ApiProperty({ name: 'phoneModel' })
     phoneModel: string;
+
+    @IsNotEmpty({ message: '不可以为空' })
+    @ApiProperty({ name: 'roleId' })
+    roleId: string;
 }

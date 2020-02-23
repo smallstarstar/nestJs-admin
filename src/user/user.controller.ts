@@ -8,9 +8,9 @@ import { UserInfo } from '../models/user-info';
 export class UserController {
     constructor(private userService: UserService) { }
 
-    @Get('/username/:userName/password/:password')
+    @Get('/username/password/:userName/:password')
     @ApiOperation({ summary: '用户登录' })
-    userLogins(@Param('userName') userName: string, @Param('password') password: string) {
+    userLogins(@Query('userName') userName: string, @Query('password') password: string) {
         return this.userService.userLogin(userName, password);
     }
 
@@ -46,7 +46,14 @@ export class UserController {
 
     @Get('/getUserInfoBypageAndSize/:page/:size')
     @ApiOperation({ summary: '分页获取用户的数据' })
-    getuserListByPageAndSize(@Param('page') page: number, @Param('size') size: number) {
+    getuserListByPageAndSize(@Query('page') page: number, @Query('size') size: number) {
         return this.userService.getUserInfoListByPageAndSize(page, size);
     }
+
+    @Get('/phone/:phone')
+    @ApiOperation({ summary: '根据手机号码找回密码' })
+    getUserPasswordByPhone(@Param('phone') phone: string) {
+        return this.userService.getFindPasswordBack(phone);
+    }
 }
+

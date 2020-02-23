@@ -1,4 +1,4 @@
-import { prop } from '@typegoose/typegoose'
+import { prop } from '@typegoose/typegoose';
 
 export class UserInfoEntity {
 
@@ -9,11 +9,15 @@ export class UserInfoEntity {
     password: string;
 
     @prop()
-    Phone: string;
+    phone: string;
 
     @prop()
     email: string;
 
     @prop() 
     phoneModel: string;
+    
+    @prop()   
+    roleId: string;
 }
+

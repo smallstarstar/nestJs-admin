@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { UserInfoEntity } from '../entity/user-info-entity';
 import { InjectModel } from 'nestjs-typegoose';
 import { UserInfo } from '../models/user-info'
@@ -15,12 +15,25 @@ export class UserService {
     ) { }
     // 用户登录
     async userLogin(username: string, password: string) {
-        const data = await this.userInfoEntity.findOne({ username: username, password: password });
-        return data;
+        const data: any = await this.userInfoEntity.findOne({ username: username, password: password });
+        if (!data) {
+            // 抛出异常
+            throw new HttpException({ code: 40001, message: '用户不存在' }, HttpStatus.BAD_REQUEST);
+        } else {
+            return data;
+        }
+
     }
     // 保存用户信息
     async saveUserInfo(userInfo: UserInfo) {
-        return await this.userInfoEntity.create(userInfo);
+        const data: UserInfoEntity = await this.userInfoEntity.findOne({ phone: userInfo.phone });
+        if (data) {
+            return {
+                message: '用户已经存在'
+            }
+        } else {
+            return await this.userInfoEntity.create(userInfo);
+        }
     }
     // 获取全部信息
     async  getUserInfoList() {
@@ -43,7 +56,16 @@ export class UserService {
         const pageBean: PageBean = new PageBean();
         const skip = (page - 1) * size;
         pageBean.total = await this.userInfoEntity.countDocuments();
-        pageBean.list = await this.userInfoEntity.find().limit(page - 1).skip(skip);
+        pageBean.list = await this.userInfoEntity.find().limit(+size).skip(+skip);
         return pageBean;
+    }
+    // 用户找回密码(根据手机号码)
+    async getFindPasswordBack(phone: string) {
+        const data = await this.userInfoEntity.findOne({ phone: phone });
+        if (!data) {
+            throw new HttpException({ code: 40001, message: '用户不存在' }, HttpStatus.NOT_FOUND);
+        } else {
+            return data;
+        }
     }
 }
