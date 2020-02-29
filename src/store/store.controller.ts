@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Delete } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { StoreService } from './store.service';
 import { StoreInfo } from 'src/models/store-info';
@@ -19,5 +19,11 @@ export class StoreController {
     @ApiOperation({ summary: '分页获取仓库信息接口' })
     getStoreByPageAndSize(@Query('page') page: number, @Query('size') size: number) {
         return this.storeServices.getStoreInfoByPageAndSize(page, size);
+    }
+
+    @Delete('deleteById/:id/:perId')
+    @ApiOperation({ summary: '分页获取仓库信息接口' })
+    deleteStoreInfoById(@Query('id') id: string, @Query('perId') perId: string, ) {
+        return this.storeServices.deleteStoreInfoById(id, perId);
     }
 }

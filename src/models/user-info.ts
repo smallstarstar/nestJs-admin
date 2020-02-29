@@ -11,7 +11,7 @@ export class UserInfo {
     password: string;
 
     @ApiProperty({ name: 'phone' })
-    // @Length(11)
+    @Length(11)
     @IsNotEmpty({ message: '不可以为空' })
     phone: string;
 

@@ -32,6 +32,10 @@ export class StoreInfo {
     @IsNotEmpty({message:'不能为空'})
     personId: string;
 
+    @ApiProperty({name: 'remark'})
+    @IsNotEmpty({message:'不能为空'})
+    remark: string;
+
     
     @ApiProperty({name: 'cTime'})
     @IsNotEmpty({message:'不能为空'})

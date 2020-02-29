@@ -10,14 +10,17 @@ export class TimeSheetService {
     async getTimesheetInfoByPersonId(id: string) {
         return await this.timeSheetEntity.find({ cpersonId: id });
     }
-
-    async saveTimeSheet(cPerson: string, cPersonId, messageKey: string, others: object) {
+    async saveTimeSheet(cPerson: string, cPersonId: string, messageKey: string, others?: object) {
         const timeSheetEntity = new TimeSheetEntity();
         timeSheetEntity.cperson = cPerson;
         timeSheetEntity.cpersonId = cPersonId;
         timeSheetEntity.messageKey = messageKey;
         timeSheetEntity.cTime = new Date().getTime();
         timeSheetEntity.others = others;
-        await this.timeSheetEntity.create(timeSheetEntity);
+        return await this.timeSheetEntity.create(timeSheetEntity);
+    }
+
+    async getTimeSheetListInfo(): Promise<any[]> {
+        return await this.timeSheetEntity.find();
     }
 }

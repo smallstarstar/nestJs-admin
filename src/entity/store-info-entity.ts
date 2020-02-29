@@ -4,7 +4,7 @@ export class StoreInfoEntity {
 
     // 名称
     @prop()
-    storeName: string;
+    name: string;
 
     // 类型
     @prop()
@@ -35,4 +35,7 @@ export class StoreInfoEntity {
     @prop()
     cTime: number;
 
+    // 备注
+    @prop()
+    remark: string;
 }
