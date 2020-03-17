@@ -18,7 +18,7 @@ export class UserService {
         const data: any = await this.userInfoEntity.findOne({ username: username, password: password });
         if (!data) {
             // 抛出异常
-            throw new HttpException({ code: 40001, message: '用户不存在' }, HttpStatus.BAD_REQUEST);
+            throw new HttpException({ code: 40001, message: '用户不存在，请注册' }, HttpStatus.BAD_REQUEST);
         } else {
             return data;
         }

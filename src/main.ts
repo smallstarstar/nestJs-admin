@@ -4,16 +4,16 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule);1
   // 允许跨域
   app.enableCors();
   // 验证管道
   app.useGlobalPipes(new ValidationPipe)
   const options = new DocumentBuilder()
-    .setTitle('nest接口')
+    .setTitle('服务接口')
     .setDescription('使用nest书写的常用性接口')
     .setVersion('1.0.0')
-    .addTag('仓库后台服务系统')
+    .addTag('服务接口')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   // 访问swagger地址是localhost:8666/swagger;
